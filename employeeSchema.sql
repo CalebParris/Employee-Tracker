@@ -15,7 +15,7 @@ CREATE TABLE roles(
     salary DECIMAL(10,4) NOT NULL,
     department_id INT NULL,
     PRIMARY KEY (id),
-    CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES department(id) ON UPDATE SET NULL ON DELETE SET NULL
+    CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES departments(id) ON UPDATE SET NULL ON DELETE SET NULL
 );
 
 CREATE TABLE employees(
@@ -26,9 +26,9 @@ CREATE TABLE employees(
     manager_id INT NULL,
     PRIMARY KEY (id),
     CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES roles(id) ON UPDATE SET NULL ON DELETE SET NULL,
-    CONSTRAINT fk_manager FOREIGN KEY (manager_id) REFERENCES employee(id) ON UPDATE SET NULL ON DELETE SET NULL
+    CONSTRAINT fk_manager FOREIGN KEY (manager_id) REFERENCES employees(id) ON UPDATE SET NULL ON DELETE SET NULL
 );
 
-SELECT * FROM employee;
-SELECT * FROM role;
-SELECT * FROM department;
+SELECT * FROM employees;
+SELECT * FROM roles;
+SELECT * FROM departments;
