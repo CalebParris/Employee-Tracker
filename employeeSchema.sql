@@ -3,15 +3,10 @@ CREATE DATABASE employee_DB;
 
 USE employee_DB;
 
-CREATE TABLE employee(
+CREATE TABLE department(
     id INT NOT NULL AUTO_INCREMENT,
-    first_name VARCHAR(30) NOT NULL,
-    last_name VARCHAR(30) NOT NULL,
-    role_id INT NULL,
-    manager_id INT NULL,
-    PRIMARY KEY (id),
-    CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES roles(id) ON UPDATE SET NULL ON DELETE SET NULL,
-    CONSTRAINT fk_manager FOREIGN KEY (manager_id) REFERENCES employee(id) ON UPDATE SET NULL ON DELETE SET NULL
+    name VARCHAR(30) NOT NULL,
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE roles(
@@ -23,10 +18,15 @@ CREATE TABLE roles(
     CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES department(id) ON UPDATE SET NULL ON DELETE SET NULL
 );
 
-CREATE TABLE department(
+CREATE TABLE employee(
     id INT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(30) NOT NULL,
-    PRIMARY KEY (id)
+    first_name VARCHAR(30) NOT NULL,
+    last_name VARCHAR(30) NOT NULL,
+    role_id INT NULL,
+    manager_id INT NULL,
+    PRIMARY KEY (id),
+    CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES roles(id) ON UPDATE SET NULL ON DELETE SET NULL,
+    CONSTRAINT fk_manager FOREIGN KEY (manager_id) REFERENCES employee(id) ON UPDATE SET NULL ON DELETE SET NULL
 );
 
 SELECT * FROM employee;
