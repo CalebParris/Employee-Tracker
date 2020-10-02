@@ -6,7 +6,7 @@ const connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
     user: "root",
-    password: "",
+    password: "", // Enter your personal password from MySQL Workbench
     database: "employee_DB"
 });
 
@@ -15,6 +15,7 @@ connection.connect(function(err){
     employeeTracker();
 });
 
+// Main menu questions
 function employeeTracker(){
     inquirer.prompt([
         {
@@ -59,6 +60,7 @@ function employeeTracker(){
     });
 }
 
+// View all employees
 function allEmployees(){
     let query = "SELECT e.id, CONCAT(e.first_name, ' ', e.last_name) AS employee, title, name AS department, salary, CONCAT(e2.first_name, ' ', e2.last_name) AS manager FROM departments, roles, employees AS e LEFT JOIN employees AS e2 ON e2.id = e.manager_id WHERE e.role_id = roles.id AND roles.department_id = departments.id";
     connection.query(query, function(err, res){
@@ -68,6 +70,7 @@ function allEmployees(){
     });
 }
 
+// View all employees in a specified department
 function departmentEmployees(){
     let query = "SELECT * FROM departments";
     connection.query(query, function(err, res){
@@ -96,6 +99,7 @@ function departmentEmployees(){
     });
 }
 
+// View all employees in a specified role
 function roleEmployees(){
     let query = "SELECT * FROM roles";
     connection.query(query, function(err, res){
@@ -124,6 +128,7 @@ function roleEmployees(){
     });
 }
 
+// Add either a manager or regular employee
 function addEmployee(){
     let query = "SELECT * FROM roles";
     connection.query(query, function(err, res){
@@ -224,6 +229,7 @@ function addEmployee(){
 });
 }
 
+// Add a new department
 function addDepartment(){
     inquirer.prompt([
         {
@@ -241,6 +247,7 @@ function addDepartment(){
     });
 }
 
+// Add a new role
 function addRole(){
     let query = "SELECT * FROM departments";
     connection.query(query, function(err, res){
@@ -291,6 +298,7 @@ function addRole(){
 });
 }
 
+// Change an existing employee's role to a different role
 function updateRole(){
     let query = "SELECT * FROM employees";
     connection.query(query, function(err, res){
